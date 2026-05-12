@@ -2615,14 +2615,16 @@
   </div>
 </footer>
 
+<script src="../static/config.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════
 //  Finance With 4B's — Frontend API Client
 //  All data fetched from Flask backend at /api/*
 // ═══════════════════════════════════════════════════════
 
-const API_BASE = '';   // same origin — Flask serves the HTML too
-const STATIC_MODE = location.hostname.endsWith('github.io') || location.protocol === 'file:';
+const queryApiBase = new URLSearchParams(location.search).get('api');
+const API_BASE = (queryApiBase || window.API_BASE || '').replace(/\/$/, '');
+const STATIC_MODE = !API_BASE && (location.hostname.endsWith('github.io') || location.protocol === 'file:');
 
 const STATIC_DATA = {
   gold: {

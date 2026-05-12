@@ -9,6 +9,24 @@
 
 **Note:** GitHub Pages is static only. The Flask admin panel and live API do not run there. Edit the `STATIC_DATA` block inside `templates/index.html` to update the displayed rates, or run the Flask backend locally for live updates.
 
+## Deploy Flask Backend (Render)
+1. Create a **Web Service** on Render from this repo.
+2. **Build command:** `pip install -r requirements.txt`
+3. **Start command:** `gunicorn app:app`
+4. Set environment variables:
+   - `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_PORT`
+   - `ADMIN_USERNAME`, `ADMIN_PASSWORD`
+   - `FLASK_SECRET_KEY`
+5. Deploy and copy the service URL (example: `https://your-app.onrender.com`).
+
+## Connect GitHub Pages to the Backend
+1. Open `static/config.js`
+2. Set:
+   ```js
+   window.API_BASE = "https://your-app.onrender.com";
+   ```
+3. Commit + push, then reload your GitHub Pages site.
+
 ### 1. Set Environment Variables (PowerShell)
 ```powershell
 $env:MYSQL_HOST="localhost"
